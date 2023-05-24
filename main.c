@@ -1,38 +1,47 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <fcntl.h>
 #include <string.h>
-void prompt_user(void);
 
-int main(void) {
-    char command[100];
+#define BUFFER_SIZE 1024
+
+int main() {
+    char *prompt = "shell> ";
+    char buffer[BUFFER_SIZE];
 
     while (1) {
-        prompt_user();
+        write(STDOUT_FILENO, prompt, strlen(prompt));
 
-        if (fgets(command, sizeof(command), stdin) == NULL) {
-            // Handle end-of-file condition
-            printf("\n");
+        ssize_t bytesRead = read(STDIN_FILENO, buffer, BUFFER_SIZE);
+        if (bytesRead == -1) {
+            perror("read");
+            exit(EXIT_FAILURE);
+        } else if (bytesRead == 0) {
+            // End of file condition (Ctrl+D)
+            write(STDOUT_FILENO, "\n", 1);
             break;
         }
 
-        // Remove the newline character at the end of the command
-        command[strcspn(command, "\n")] = '\0';
+        buffer[strcspn(buffer, "\n")] = '\0';
 
-        // Check if the command is empty
-        if (strlen(command) == 0)
-            continue;
-
-        // Check if the command is longer than one word
-        if (strchr(command, ' ') != NULL) {
-            printf("Error: Command should be a single word\n");
-            continue;
+        pid_t pid = fork();
+        if (pid < 0) {
+            perror("fork");
+            exit(EXIT_FAILURE);
+        } else if (pid == 0) {
+            char *args[] = {buffer, NULL};
+            execve(args[0], args, NULL);
+            perror("execve");
+            _exit(EXIT_FAILURE);
+        } else {
+            int status;
+            waitpid(pid, &status, 0);
         }
-
-        // Execute the command or print an error message
-        if (system(command) == -1)
-            printf("Error: Command not found\n");
     }
 
     return 0;
 }
+
