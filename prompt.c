@@ -1,25 +1,17 @@
-#include "shell.h"
-/**
-* shell_prompt - function that accepts input
-* @str:  It is a pointer to a character array or string
-* Return: 0 when a str is parsed and 0 if not
-*/
-int shell_prompt(char *str)
-{
-	char buf[100];
-	ssize_t bytesRead;
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
 
-	write(STDOUT_FILENO, "Boniel_Ben-$ ", 13);
-	bytesRead = read(STDIN_FILENO, buf, sizeof(buf) - 1);
+typedef struct {
+    int interactive;
+} Flags;
 
-	if (bytesRead > 0)
-	{
-		buf[bytesRead - 1] = '\0';
-		strcpy(str, buf);
-		return (0);
-	}
-	else
-	{
-		return (1);
-	}
+Flags flags = { 0 }; // Initialize flags
+
+void prompt_user(void) {
+    if ((isatty(STDIN_FILENO) == 1) && (isatty(STDOUT_FILENO) == 1))
+        flags.interactive = 1;
+    if (flags.interactive)
+        write(STDERR_FILENO, "$ ", 2);
 }

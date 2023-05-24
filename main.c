@@ -1,27 +1,38 @@
-#include "shell.h"
-/**
- * main - Entry Point
- * Return: 0 always
- */
-int main(void)
-{
-	char inputString[MAXCOM], *parsedArgs[MAXLIST];
-	char *parsedArgsPiped[MAXLIST];
-	int execFlag = 0;
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+void prompt_user(void);
 
-	while (1)
-	{
-		printDir();
+int main(void) {
+    char command[100];
 
-		if (shell_prompt(inputString))
-			continue;
-		execFlag = processString(inputString, parsedArgs, parsedArgsPiped);
+    while (1) {
+        prompt_user();
 
-		if (execFlag == 1)
-			execArgs(parsedArgs);
+        if (fgets(command, sizeof(command), stdin) == NULL) {
+            // Handle end-of-file condition
+            printf("\n");
+            break;
+        }
 
-		if (execFlag == 2)
-			execArgsPiped(parsedArgs);
-	}
-	return (0);
+        // Remove the newline character at the end of the command
+        command[strcspn(command, "\n")] = '\0';
+
+        // Check if the command is empty
+        if (strlen(command) == 0)
+            continue;
+
+        // Check if the command is longer than one word
+        if (strchr(command, ' ') != NULL) {
+            printf("Error: Command should be a single word\n");
+            continue;
+        }
+
+        // Execute the command or print an error message
+        if (system(command) == -1)
+            printf("Error: Command not found\n");
+    }
+
+    return 0;
 }
