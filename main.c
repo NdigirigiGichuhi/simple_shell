@@ -9,11 +9,11 @@ int main(void)
 	char *parsedArgsPiped[MAXLIST];
 	int execFlag = 0;
 
-	init_shell(void);
+	init_shell();
 
 	while (1)
 	{
-		printDir(void);
+		printDir();
 
 		if (takeInput(inputString))
 			continue;

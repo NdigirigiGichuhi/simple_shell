@@ -18,4 +18,7 @@ int parsePipe(char *str, char **strpiped)
 	}
 	if (strpiped[1] == NULL)
 		return (0);
+
+	else
+		return (1);
 }
