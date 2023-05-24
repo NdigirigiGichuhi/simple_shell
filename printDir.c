@@ -1,9 +1,13 @@
 #include "shell.h"
 
-// Function to print Current Directory.
-void printDir()
+/**
+ * printDir - Function to print Current Directory.
+ * Return: void
+ */
+void printDir(void)
 {
-        char cwd[1024];
-        getcwd(cwd, sizeof(cwd));
-        printf("\nDir: %s", cwd);
+	char cwd[1024];
+
+	getcwd(cwd, sizeof(cwd));
+	printf("\nDir: %s", cwd);
 }

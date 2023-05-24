@@ -1,24 +1,29 @@
 #include "shell.h"
-
-int processString(char* str, char** parsed, char** parsedpipe)
+/**
+ * processString - tokenizes the input string and handle pipes
+ * @str: string to parse
+ * @parsed: string parsed
+ * @parsedpipe: str piped
+ * Return: 1 or 0 when str is piped
+*/
+int processString(char *str, char **parsed, char **parsedpipe)
 {
+	char *strpiped[2];
+	int piped = 0;
 
-        char* strpiped[2];
-        int piped = 0;
+	piped = parsePipe(str, strpiped);
 
-        piped = parsePipe(str, strpiped);
-
-        if (piped) {
-                parseSpace(strpiped[0], parsed);
-                parseSpace(strpiped[1], parsedpipe);
-
-        } else {
-
-                parseSpace(str, parsed);
-        }
-
-        if (ownCmdHandler(parsed))
-                return 0;
-        else
-                return 1 + piped;
+	if (piped)
+	{
+		parseSpace(strpiped[0], parsed);
+		parseSpace(strpiped[1], parsedpipe);
+	}
+	else
+	{
+		parseSpace(str, parsed);
+	}
+	if (ownCmdHandler(parsed))
+		return (0);
+	else
+		return (1 + piped);
 }

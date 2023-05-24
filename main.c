@@ -1,32 +1,29 @@
 #include "shell.h"
-
-int main()
+/**
+ * main - Entry Point
+ * Return: 0 always
+ */
+int main(void)
 {
-        char inputString[MAXCOM], *parsedArgs[MAXLIST];
-        char* parsedArgsPiped[MAXLIST];
-        int execFlag = 0;
-        init_shell();
+	char inputString[MAXCOM], *parsedArgs[MAXLIST];
+	char *parsedArgsPiped[MAXLIST];
+	int execFlag = 0;
 
-        while (1) {
-                // print shell line
-                printDir();
-                // take input
-                if (takeInput(inputString))
-                        continue;
-                // process
-                execFlag = processString(inputString,
-                parsedArgs, parsedArgsPiped);
-                // execflag returns zero if there is no command
-                // or it is a builtin command,
-                // 1 if it is a simple command
-                // 2 if it is including a pipe.
+	init_shell(void);
 
-                // execute
-                if (execFlag == 1)
-                        execArgs(parsedArgs);
+	while (1)
+	{
+		printDir(void);
 
-                if (execFlag == 2)
-                        execArgsPiped(parsedArgs, parsedArgsPiped);
-        }
-        return 0;
+		if (takeInput(inputString))
+			continue;
+		execFlag = processString(inputString, parsedArgs, parsedArgsPiped);
+
+		if (execFlag == 1)
+			execArgs(parsedArgs);
+
+		if (execFlag == 2)
+			execArgsPiped(parsedArgs, parsedArgsPiped);
+	}
+	return (0);
 }
