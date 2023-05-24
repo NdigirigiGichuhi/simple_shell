@@ -23,7 +23,7 @@ void printDir(void);
 void execArgs(char **parsed);
 void execArgsPiped(char **parsed);
 void openHelp(void);
-int ownCmdHandler(char **parsed);
+int HandleCommand(char **parsed);
 int parsePipe(char *str, char **strpiped);
 void parseSpace(char *str, char **parsed);
 int processString(char *str, char **parsed, char **parsedpipe);

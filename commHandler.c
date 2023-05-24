@@ -1,25 +1,25 @@
 #include "shell.h"
 
 /**
-* ownCmdHandler - Function to execute builtin commands
+* HandleCommand - Function to execute builtin commands
 * @parsed: command to parse
 *
 * Return: 0 always
 */
-int ownCmdHandler(char **parsed)
+int HandleCommand(char** parsed)
 {
-	int NoOfOwnCmds = 4, i, switchOwnArg = 0;
-	char *ListOfOwnCmds[100];
-	char *username;
+	int Commands = 4, i, switchOwnArg = 0;
+	char* MyCmd[4];
+	char* user;
 
-	ListOfOwnCmds[0] = "exit";
-	ListOfOwnCmds[1] = "cd";
-	ListOfOwnCmds[2] = "help";
-	ListOfOwnCmds[3] = "hello";
+	MyCmd[0] = "exit";
+	MyCmd[1] = "cd";
+	MyCmd[2] = "help";
+	MyCmd[3] = "hello";
 
-	for (i = 0; i < NoOfOwnCmds; i++)
+	for (i = 0; i < Commands; i++)
 	{
-		if (strcmp(parsed[0], ListOfOwnCmds[i]) == 0)
+		if (strcmp(parsed[0], MyCmd[i]) == 0)
 		{
 			switchOwnArg = i + 1;
 			break;
@@ -34,11 +34,10 @@ int ownCmdHandler(char **parsed)
 			chdir(parsed[1]);
 			return (1);
 		case 3:
-			openHelp();
 			return (1);
 		case 4:
-			username = getenv("USER");
-			printf("\nHello %s.\n Use help to know more..\n", username);
+			user = getenv("USER");
+			printf("\nHello %s.\n helps you to know more...\n", user);
 			return (1);
 		default:
 			break;

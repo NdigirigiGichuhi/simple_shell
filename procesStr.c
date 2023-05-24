@@ -22,7 +22,7 @@ int processString(char *str, char **parsed, char **parsedpipe)
 	{
 		parseSpace(str, parsed);
 	}
-	if (ownCmdHandler(parsed))
+	if (HandleCommand(parsed))
 		return (0);
 	else
 		return (1 + piped);
