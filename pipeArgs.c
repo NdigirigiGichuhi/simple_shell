@@ -3,13 +3,12 @@
 /**
  * execArgsPiped - Function where the piped system commands is executed
  * @parsed: command to be parsed
- * @parsedpipe: pipe to pass command
  * Return: void
  */
-void execArgsPiped(char **parsed, char **parsedpipe)
+void execArgsPiped(char **parsed)
 {
 	int pipefd[2];
-	pid_t p1, p2;
+	pid_t p1;
 
 	if (pipe(pipefd) < 0)
 	{
@@ -36,28 +35,7 @@ void execArgsPiped(char **parsed, char **parsedpipe)
 	}
 	else
 	{
-		p2 = fork();
-
-		if (p2 < 0)
-		{
-			printf("\nfork Error");
-			return;
-		}
-		if (p2 == 0)
-		{
-			close(pipefd[1]);
-			dup2(pipefd[0], STDIN_FILENO);
-			close(pipefd[0]);
-			if (execvp(parsedpipe[0], parsedpipe) < 0)
-			{
-				printf("\nCould not execute command 2..");
-				exit(0);
-			}
-		}
-		else
-		{
-			wait(NULL);
-			wait(NULL);
-		}
+		wait(NULL);
+		wait(NULL);
 	}
 }

@@ -22,7 +22,7 @@ void init_shell(void);
 int takeInput(char *str);
 void printDir(void);
 void execArgs(char **parsed);
-void execArgsPiped(char **parsed, char **parsedpipe);
+void execArgsPiped(char **parsed);
 void openHelp(void);
 int ownCmdHandler(char **parsed);
 int parsePipe(char *str, char **strpiped);

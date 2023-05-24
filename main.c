@@ -23,7 +23,7 @@ int main(void)
 			execArgs(parsedArgs);
 
 		if (execFlag == 2)
-			execArgsPiped(parsedArgs, parsedArgsPiped);
+			execArgsPiped(parsedArgs);
 	}
 	return (0);
 }
