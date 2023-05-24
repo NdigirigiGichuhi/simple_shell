@@ -4,6 +4,6 @@
 Ndigirigi Gichuhi <ndigirigigichuhi@gmail.com>
 Boniel Wanjohi <bonielwanjohi@gmail.com>
 
-Simple Shell
+Simple shell
 #	NdigirigiGichuhi
 #	Boniel-M
