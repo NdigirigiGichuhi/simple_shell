@@ -1,10 +1,10 @@
 #include "shell.h"
 /**
-* takeInput - function that accepts input
+* shell_prompt - function that accepts input
 * @str:  It is a pointer to a character array or string
 * Return: 0 when a str is parsed and 0 if not
 */
-int takeInput(char *str)
+int shell_prompt(char *str)
 {
 	char buf[100];
 	ssize_t bytesRead;

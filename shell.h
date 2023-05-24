@@ -18,8 +18,7 @@
 /* Clearing the shell using escape sequences */
 #define clear() printf("\033[H\033[J")
 
-void init_shell(void);
-int takeInput(char *str);
+int shell_prompt(char *str);
 void printDir(void);
 void execArgs(char **parsed);
 void execArgsPiped(char **parsed);
