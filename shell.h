@@ -28,7 +28,11 @@ void prompt(void);
 void signal_handler(int c);
 char **token_handler(char *line);
 
-
+/**
+ * struct builtin - executes built in commands.
+ * @env: environment.
+ * @exit: exit
+ */
 
 struct builtin
 {
@@ -36,11 +40,23 @@ struct builtin
 	char *exit;
 };
 
+/**
+ * struct information - provides info.
+ * @final_exit: last exit in shell.
+ * @ln_count: number of line executed.
+ */
+
 struct information
 {
 	int final_exit;
 	int ln_count;
 };
+
+
+/**
+ * struct flags - running flags.
+ * @interactive: interactive shell
+ */
 
 struct flags
 {
