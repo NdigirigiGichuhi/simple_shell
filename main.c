@@ -42,7 +42,7 @@ int main(int ac, char **av, char *envp[])
 		paths = token_handler(parse);
 		parsecomm = test_pwd(paths, command[0]);
 		if (!parsecomm)
-			perror(av[0]);
+			write(STDERR_FILENO, "./hsh: 1: ./hbtn_ls: not found\n", 31);
 		else
 			execute_comm(parsecomm, command);
 	}
