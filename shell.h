@@ -5,7 +5,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <string.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
@@ -15,7 +14,7 @@
 extern char **environ;
 extern __sighandler_t signal(int __sig, __sighandler_t __handler);
 
-
+char *my_strtok(char *str, char *delimiters);
 void print_Shellenv(void);
 void execute_comm(char *comm_p, char **command);
 char *pwd_path(void);
