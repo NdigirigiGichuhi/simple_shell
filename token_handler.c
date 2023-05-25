@@ -1,4 +1,5 @@
 #include "shell.h"
+#include "shell.h"
 
 /**
 * token_handler - this function creates tokens
@@ -9,16 +10,19 @@
 */
 char **token_handler(char *line)
 {
-	char *buffer = NULL, *bufp = NULL, *token = NULL, *delimiter = " :\t\r\n";
+	char *buffer = NULL, *bufp = NULL, *token = NULL, *delimiter = " :;\t\r\n";
 	char **tokens = NULL;
 	int tokensize = 1;
 	size_t index = 0, flag = 0;
+	char *comment;
 
 	buffer = my_strdup(line);
 	if (!buffer)
 		return (NULL);
+	comment = my_strchr(buffer, '#');
+	if (comment)
+		*comment = '\0';
 	bufp = buffer;
-
 	while (*bufp)
 	{
 		if (my_strchr(delimiter, *bufp) != NULL && flag == 0)
@@ -43,7 +47,8 @@ char **token_handler(char *line)
 		token = my_strtok(NULL, delimiter);
 		index++;
 	}
-	tokens[index] = '\0';
+	tokens[index] = NULL;
 	free(buffer);
 	return (tokens);
 }
+
