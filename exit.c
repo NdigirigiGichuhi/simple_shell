@@ -6,5 +6,5 @@
  */
 void exitShell(void)
 {
-	_exit(EXIT_SUCCESS);
+	exit(0);
 }
