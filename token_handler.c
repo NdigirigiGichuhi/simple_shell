@@ -31,7 +31,7 @@ char **token_handler(char *line)
 		bufp++;
 	}
 	tokens = malloc(sizeof(char *) * (tokensize + 1));
-	token = strtok(buffer, delimiter);
+	token = my_strtok(buffer, delimiter);
 	while (token)
 	{
 		tokens[index] = my_strdup(token);
@@ -40,7 +40,7 @@ char **token_handler(char *line)
 			free(tokens);
 			return (NULL);
 		}
-		token = strtok(NULL, delimiter);
+		token = my_strtok(NULL, delimiter);
 		index++;
 	}
 	tokens[index] = '\0';
