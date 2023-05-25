@@ -8,6 +8,7 @@
 void prompt(void)
 {
 	struct flags handle;
+	handle.interactive = NULL;
 
 	if ((isatty(STDIN_FILENO) == 1) && (isatty(STDOUT_FILENO) == 1))
 		handle.interactive = 1;
