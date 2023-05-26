@@ -1,27 +1,28 @@
 #include "shell.h"
 /**
-* builtin_check - checks if the command is a built-in command.
-*
-* @command: command
-* @line: input in standard input
-*
-* Return: 1 if it is a built-in command, 0 otherwise.
-*/
+ * builtin_checker - checks if the command is a built-in command.
+ *
+ * @command: command
+ * @line: input in standard input
+ *
+ * Return: 1 if it is a built-in command, 0 otherwise.
+ */
 int builtin_checker(char **command, char *line)
 {
-    int status;
-    if (my_strcmp(command[0], "exit") == 0)
-    {
-        if (command[1] != NULL)
-        {
-            status = atoi(command[1]);
-            exit(status);
-        }
-        else
-        {
-            exit_Shell(command, line);
-        }
-        return (1);
-    }
-    return (0);
+	int status;
+
+	if (my_strcmp(command[0], "exit") == 0)
+	{
+		if (command[1] != NULL)
+		{
+			status = atoi(command[1]);
+			exit(status);
+		}
+		else
+		{
+			exit_Shell(command, line);
+		}
+		return (1);
+	}
+	return (0);
 }
