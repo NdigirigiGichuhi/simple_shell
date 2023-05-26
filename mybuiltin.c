@@ -7,7 +7,7 @@
  *
  * Return: 1 if it is a built-in command, 0 otherwise.
  */
-int builtin_checker(char **command, char *line)
+int builtin_check(char **command, char *line)
 {
 	int status;
 
@@ -16,6 +16,8 @@ int builtin_checker(char **command, char *line)
 		if (command[1] != NULL)
 		{
 			status = atoi(command[1]);
+			free(line);
+			freebuffers(command);
 			exit(status);
 		}
 		else
