@@ -7,14 +7,14 @@
  */
 void prompt(void)
 {
-	struct flags handle;
+        struct flags handle;
 
-	handle.interactive = NULL;
+        handle.interactive = NULL;
 
-	if ((isatty(STDIN_FILENO) == 1) && (isatty(STDOUT_FILENO) == 1))
-		handle.interactive = 1;
-	if (handle.interactive)
-		write(STDERR_FILENO, "Boniel_Ben-Shell-$ ", 19);
+        if ((isatty(STDIN_FILENO) == 1) && (isatty(STDOUT_FILENO) == 1))
+                handle.interactive = 1;
+        if (handle.interactive)
+                write(STDERR_FILENO, "Boniel_Ben-Shell-$ ", 19);
 }
 
 
@@ -28,21 +28,37 @@ void prompt(void)
  */
 void execute_comm(char *comm_p, char **command)
 {
-	pid_t pid;
-	int status;
-	char **env = environ;
+    if (my_strcmp(command[0], "setenv") == 0)
+    {
+        setenv_Shell(command);
+    }
+    else if (my_strcmp(command[0], "unsetenv") == 0)
+    {
+        unsetenv_Shell(command);
+    }
+    else
+    {
+        pid_t pid;
+        int status;
+        char **env = environ;
 
-	pid = fork();
-	if (pid < 0)
-		perror(comm_p);
-	if (pid == 0)
-	{
-		execve(comm_p, command, env);
-		perror(comm_p);
-		free(comm_p);
-		freebuffers(command);
-		exit(98);
-	}
-	else
-		wait(&status);
+        pid = fork();
+        if (pid < 0)
+        {
+            perror(comm_p);
+        }
+        else if (pid == 0)
+        {
+            execve(comm_p, command, env);
+            perror(comm_p);
+            free(comm_p);
+            freebuffers(command);
+            exit(98);
+        }
+        else
+        {
+            wait(&status);
+        }
+    }
 }
+
