@@ -14,34 +14,6 @@ void exit_Shell(char **command, char *line)
 	freebuffers(command);
 	_exit(0);
 }
-
-/**
- * builtin_check - checks if the command is a built-in command.
- *
- * @command: command
- * @line: input in standard input
- *
- * Return: 1 if it is a built-in command, 0 otherwise.
- */
-int builtin_check(char **command, char *line)
-{
-	int status;
-	if (my_strcmp(command[0], "exit") == 0)
-	{
-		if (command[1] != NULL)
-		{
-			status = atoi(command[1]);
-			exit(status);
-		}
-		else
-		{
-			exit_Shell(command, line);
-		}
-		return (1);
-	}
-	return (0);
-}
-
 int main(int ac, char **av, char *envp[])
 {
 	struct flags handles;
@@ -68,8 +40,8 @@ int main(int ac, char **av, char *envp[])
 			ln[linelen - 1] = '\0';
 		command = token_handler(ln);
 		if (command == NULL || *command == NULL || **command == '\0')
-			continue;
-		if (builtin_check(command, ln))
+			continue; 
+		if (builtin_checker(command, ln))
 			continue;
 		parse = pwd_path();
 		paths = token_handler(parse);

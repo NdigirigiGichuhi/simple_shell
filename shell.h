@@ -69,4 +69,6 @@ int my_strcmp(char *str1, char *str2);
 char *my_strdup(char *str);
 int my_strncmp(char *str1, char *str2, int n);
 
+int builtin_checker(char **command, char *line);
+
 #endif /* SHELL_H */
