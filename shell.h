@@ -63,10 +63,16 @@ struct flags
 	bool interactive;
 };
 
+
+char *handle_variable_replacement(char *input);
+
+
+
 char *my_strchr(char *str, char m);
 int my_strlen(char *str);
 int my_strcmp(char *str1, char *str2);
 char *my_strdup(char *str);
 int my_strncmp(char *str1, char *str2, int n);
+char *my_strcpy(char *destination, char *source);
 
 #endif /* SHELL_H */
