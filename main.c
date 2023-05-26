@@ -1,14 +1,17 @@
 #include "shell.h"
 /**
-* main - Entry point.
-*
-* @ac: argument count
-* @av: argument vector
-* @envp: environment vector
-*
-* Return: always 0
-*/
+ * main - Entry point.
+ *
+ * @ac: argument count
+ * @av: argument vector
+ * @envp: environment vector
+ *
+ * Return: always 0
+ */
 
+void handle_exit(int status) {
+    exit(status);
+}
 int main(int ac, char **av, char *envp[])
 {
 	struct flags handles;
@@ -45,10 +48,21 @@ int main(int ac, char **av, char *envp[])
 			perror(av[0]);
 		else
 			execute_comm(parsecomm, command);
+		if (builtin_check(command, ln)) {
+			if (my_strcmp(command[0], "exit") == 0) {
+				if (command[1] != NULL) {
+					int status = atoi(command[1]);
+					handle_exit(status);
+				} else {
+					handle_exit(0);
+				}
+			}
+			continue;
+		}
 	}
-	handles.interactive = NULL;
-	if (linelen < 0 && handles.interactive)
-		write(STDERR_FILENO, "\n", 1);
-	free(ln);
-	return (0);
-}
+		handles.interactive = NULL;
+		if (linelen < 0 && handles.interactive)
+			write(STDERR_FILENO, "\n", 1);
+		free(ln);
+		return (0);
+	}
