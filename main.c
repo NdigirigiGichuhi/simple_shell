@@ -1,19 +1,13 @@
 #include "shell.h"
-
 /**
- * exit_Shell - this function exits CLI.
+ * main - Entry point.
  *
- * @command: command
- * @line: input in standard input
+ * @ac: argument count
+ * @av: argument vector
+ * @envp: environment vector
  *
- * Return: void
+ * Return: always 0
  */
-void exit_Shell(char **command, char *line)
-{
-	free(line);
-	freebuffers(command);
-	_exit(0);
-}
 int main(int ac, char **av, char *envp[])
 {
 	struct flags handles;
@@ -40,8 +34,8 @@ int main(int ac, char **av, char *envp[])
 			ln[linelen - 1] = '\0';
 		command = token_handler(ln);
 		if (command == NULL || *command == NULL || **command == '\0')
-			continue; 
-		if (builtin_checker(command, ln))
+			continue;
+		if (builtin_check(command, ln))
 			continue;
 		parse = pwd_path();
 		paths = token_handler(parse);
@@ -57,4 +51,3 @@ int main(int ac, char **av, char *envp[])
 	free(ln);
 	return (0);
 }
-

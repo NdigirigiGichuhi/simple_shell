@@ -20,6 +20,5 @@ int builtin_check(char **command, char *buffer)
 		execute_comm(command[0], command);
 		return (1);
 	}
-
 	return (0);
 }
