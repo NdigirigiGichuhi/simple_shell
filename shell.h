@@ -69,10 +69,4 @@ int my_strcmp(char *str1, char *str2);
 char *my_strdup(char *str);
 int my_strncmp(char *str1, char *str2, int n);
 
-void setenv_Shell(char **command);
-void unsetenv_Shell(char **command);
 #endif /* SHELL_H */
-
-
-
-
