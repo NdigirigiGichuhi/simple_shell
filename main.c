@@ -44,20 +44,6 @@ int main(int ac, char **av, char *envp[])
 			perror(av[0]);
 		else
 			execute_comm(parsecomm, command);
-
-		if (builtin_check(command, ln))
-		{
-			if (my_strcmp(command[0], "setenv") == 0)
-			{
-				setenv_Shell(command);
-				continue;
-			}
-			else if (my_strcmp(command[0], "unsetenv") == 0)
-			{
-				unsetenv_Shell(command);
-				continue;
-			}
-		}
 	}
 	handles.interactive = NULL;
 	if (linelen < 0 && handles.interactive)
