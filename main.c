@@ -1,13 +1,47 @@
 #include "shell.h"
+
 /**
- * main - Entry point.
+ * exit_Shell - this function exits CLI.
  *
- * @ac: argument count
- * @av: argument vector
- * @envp: environment vector
+ * @command: command
+ * @line: input in standard input
  *
- * Return: always 0
+ * Return: void
  */
+void exit_Shell(char **command, char *line)
+{
+	free(line);
+	freebuffers(command);
+	_exit(0);
+}
+
+/**
+ * builtin_check - checks if the command is a built-in command.
+ *
+ * @command: command
+ * @line: input in standard input
+ *
+ * Return: 1 if it is a built-in command, 0 otherwise.
+ */
+int builtin_check(char **command, char *line)
+{
+	int status;
+	if (my_strcmp(command[0], "exit") == 0)
+	{
+		if (command[1] != NULL)
+		{
+			status = atoi(command[1]);
+			exit(status);
+		}
+		else
+		{
+			exit_Shell(command, line);
+		}
+		return (1);
+	}
+	return (0);
+}
+
 int main(int ac, char **av, char *envp[])
 {
 	struct flags handles;
@@ -51,3 +85,4 @@ int main(int ac, char **av, char *envp[])
 	free(ln);
 	return (0);
 }
+
