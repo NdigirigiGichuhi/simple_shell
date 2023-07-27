@@ -26,9 +26,7 @@ int is_exec(char *name)
 
 /**
  * is_filee - Check if is a file or binary
- * Description: Lool for excute permissions and
- * if is a file
- * f:File to check
+ * @f:File to check
  * Return: If is a file with the correct permissions, PERMISSIONS
  */
 int is_filee(char *f)
@@ -42,3 +40,26 @@ int is_filee(char *f)
 
 	return (NON_FILE);
 }
+
+/**
+ * _putchar - Print a character to STDOUT
+ * @ch: Character to print
+ * Return: On success 1
+ * On error -1
+ */
+int _putchar(char ch)
+{
+	return (write(STDOUT, &ch, 1));
+}
+
+/**
+ * print - Print a message to STDOUT
+ * @message: Message to print
+ * Return: On success number of bytes printed
+ * On errror -1, and set the error
+ */
+int print(char *message)
+{
+	return (print_to_fd(message, STDOUT));
+}
+

@@ -3,9 +3,6 @@
 
 /**
  * bin_exit - Implementation of the exit builtin
- * Description: Free all the memory used and
- * exit with the last status_code
- *
  * @info: Information about the shell
  * @args: Arguments received
  */
@@ -32,10 +29,8 @@ void bin_exit(general_t *info, char **args)
 
 /**
  * number_controller - Control the argument of exit
- *
  * @info: General information about the shell
- * @number: Argument of the builtin
- *
+ * @num: Argument of the builtin
  * Return: If the actual argument is valid, return _TRUE
  * if not, return _FALSE
  */

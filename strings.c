@@ -19,7 +19,7 @@ int _strlen(char *message)
 /**
  * _strcat - Concatenates two strings
  * @destination: String concatenate
- * @surce: Source string
+ * @source: Source string
  * Return: A string concatenate
  */
 char *_strcat(char *destination, char *source)

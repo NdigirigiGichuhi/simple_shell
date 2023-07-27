@@ -41,7 +41,7 @@ void _get_env(void);
 
 /* execute.c */
 void execute(char *commands, char **arguments, general_t *info, char *buff);
-int current_directory(char *cmd, char **arguments, char *buff,
+int current_dirctory(char *cmd, char **arguments, char *buff,
 				general_t *info);
 
 /* builtins.c */
