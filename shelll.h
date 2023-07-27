@@ -51,47 +51,31 @@ typedef struct __attribute__((__packed__))
 	void (*func)(general_t *info, char **arguments);
 } builtin_t;
 
-
-/* text.c */
+char *c_to_string(int number);
+int _numeral(unsigned int n);
+int _atoi(char *s);
+int _alpha(char *s);
 void exec_prompt(general_t *info);
 void prompt(general_t *info);
 char *read_line();
 void sigintHandler(int sig_num);
-
-/* utils_text.c */
+int my_putchar(char l, int fd);
+int my_print(char *msg, int fd);
 int my_strlen(char *msg);
 char *my_strcat(char *dest, char *src);
 char *my_strcpy(char *dest, char *src);
 char *my_strdup(char *str);
 int my_strcmp(char *str1, char *str2);
-
-/* utils_text2.c */
-char *c_to_string(int number);
-int _numeral(unsigned int n);
-int _atoi(char *s);
-int _alpha(char *s);
-
-/* printers.c */
-int my_putchar(char l, int fd);
-int my_print(char *msg, int fd);
-
-/* printers_out.c */
 int _putchar(char c);
 int print(char *msg);
-
-/* printers_err.c */
-int print_error(char *msg);
-
-/* tokenization.c */
 char **spt_wd(char *line, const char *sep);
 char *j_wd(char *word1, char *word2, char *word3, const char *sep);
-
-/* patterns.c */
+int print_error(char *msg);
+char **spt_wd(char *line, const char *sep);
+char *j_wd(char *word1, char *word2, char *word3, const char *sep);
 void anal_p(general_t *info, char **arguments);
 char *pat_han(general_t *info, char *string);
 char *rep_val(general_t *info, int *index, char *string);
-
-/* patterns_replacer.c */
 char *replace(general_t *info, int *i, char *string);
 char *rep_env(general_t *info, char *environment);
 
