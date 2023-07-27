@@ -1,5 +1,5 @@
-#include "commands.h"
-#include "general.h"
+#include "shell.h"
+#include "shelll.h"
 
 /**
  * get_env - gets environment variable

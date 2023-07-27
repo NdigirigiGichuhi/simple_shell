@@ -1,5 +1,5 @@
-#ifndef GENERAL_H
-#define GENERAL_H
+#ifndef SHELLL_H
+#define SHELLL_H
 
 #define _TRUE            1
 #define _FALSE           0

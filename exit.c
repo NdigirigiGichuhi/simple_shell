@@ -1,5 +1,5 @@
-#include "general.h"
-#include "commands.h"
+#include "shell.h"
+#include "shelll.h"
 
 /**
  * bin_exit - Implementation of the exit builtin

@@ -1,5 +1,5 @@
-#include "general.h"
-#include "commands.h"
+#include "shell.h"
+#include "shelll.h"
 
 /**
  * prompt - Print the prompt

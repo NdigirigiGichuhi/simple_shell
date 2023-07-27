@@ -1,5 +1,5 @@
-#ifndef COMMANDS_H
-#define COMMANDS_H
+#ifndef SHELL_H
+#define SHELL_H
 
 #include <stdlib.h>
 #include <string.h>
@@ -8,7 +8,7 @@
 #include <sys/wait.h>
 #include <errno.h>
 #include <stdio.h>
-#include "general.h"
+#include "shelll.h"
 
 extern char **environ;
 
