@@ -2,8 +2,8 @@
 #include "shelll.h"
 
 /**
- * b_ex - Implementation of the exit builtin
- * @infomation: Information about the shell
+ * b_ex - implements exit builtin
+ * @infomation: information
  * @arguments: Arguments received
  */
 void b_ex(general_t *infomation, char **arguments)
@@ -28,13 +28,12 @@ void b_ex(general_t *infomation, char **arguments)
 }
 
 /**
- * number_controller - Control the argument of exit
- * @info: General information about the shell
- * @num: Argument of the builtin
- * Return: If the actual argument is valid, return _TRUE
- * if not, return _FALSE
+ * numroller - Control the arguments
+ * @infomation: information
+ * @num: builtin args
+ * Return: If actual argument is valid, return _TRUE, otherwise _FALSE
  */
-int numroller(general_t *info, char *num)
+int numroller(general_t *infomation, char *num)
 {
 	int _num;
 
@@ -42,15 +41,15 @@ int numroller(general_t *info, char *num)
 
 	if (_num < 0 || _alpha(num))
 	{
-		info->status_code = 2;
-		info->error_code = _CODE_ILLEGAL_NUMBER;
-		error_extra(info, num);
+		infomation->status_code = 2;
+		infomation->error_code = _CODE_ILLEGAL_NUMBER;
+		error_extra(infomation, num);
 		return (_FALSE);
 	}
 
 	if (_num > 255)
-		info->status_code = _num % 256;
+		infomation->status_code = _num % 256;
 	else
-		info->status_code = _num;
+		infomation->status_code = _num;
 	return (_TRUE);
 }

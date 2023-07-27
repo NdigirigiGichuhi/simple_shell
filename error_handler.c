@@ -2,9 +2,9 @@
 #include "shelll.h"
 
 /**
- * message_selector - Select the message that match with the error_code
- * @info: General information about the shell
- * Return: Error message
+ * message_selector - selects message
+ * @info: information
+ * Return: error
  */
 char *message_selector(general_t info)
 {
@@ -25,8 +25,8 @@ char *message_selector(general_t info)
 }
 
 /**
- * error - Print the error
- * @info: General information about the shell
+ * error - prints error to standard output
+ * @infomation: information
  */
 void error(general_t *infomation)
 {
@@ -57,10 +57,9 @@ void error(general_t *infomation)
 }
 
 /**
- * error_extra - Print the error with extra information
- *
- * @info: General information about the shell
- * @extra: Extra information
+ * error_extra - prints error to stdout
+ * @infomation: information
+ * @extra: extra info
  */
 void error_extra(general_t *infomation, char *extra)
 {

@@ -2,12 +2,10 @@
 #include "shelll.h"
 
 /**
- * my_putchar - Print a character to a specific file
- * descriptor
- * @ch: Character to print
- * @file: Place to print the character
+ * my_putchar - prints a char to a file
+ * @ch: Character
+ * @file: file to print on
  * Return: On success 1.
- * On error, -1 is returned, and errno is set appropriately.
  */
 int my_putchar(char ch, int file)
 {
@@ -16,11 +14,10 @@ int my_putchar(char ch, int file)
 
 
 /**
- * print_to_fd - Print a string
- * @message: Strin to print in the fd specified
- * @file: File descriptor to print
- * Return: On success numbers of bytes printed.
- * On error, -1 is returned, and errno is set appropriately.
+ * my_print - Print a string
+ * @message: string
+ * @file: file to print on
+ * Return: bytes printed.
  */
 int my_print(char *message, int file)
 {
@@ -32,9 +29,9 @@ int my_print(char *message, int file)
 }
 
 /**
- * print_error - Print a message to STDERR
- * @message: Message to print
- * Return: Number of bytes printed
+ * print_error - message printer
+ * @message: string
+ * Return: bytes printed
  */
 int print_error(char *message)
 {
@@ -42,9 +39,8 @@ int print_error(char *message)
 }
 
 /**
- * free_mem - Free a pointer
- *
- * @pointer: Pointer to free
+ * free_mem - free mem
+ * @pointer: pointer to memory.
  */
 void free_mem(void *pointer)
 {
@@ -58,9 +54,8 @@ void free_mem(void *pointer)
 }
 
 /**
- * free_mm - Free a double pointer
- *
- * @pointer: Double pointer to free
+ * free_mm - double pointer
+ * @pointer: double pointer to memory
  */
 void free_mm(void **pointer)
 {

@@ -10,7 +10,7 @@
 void analyze(char **args, general_t *information, char *buffer)
 {
 	char *cmd;
-	int status;
+	int pro;
 
 	if (*args == NULL || args == NULL)
 		return;
@@ -20,8 +20,8 @@ void analyze(char **args, general_t *information, char *buffer)
 	if (c_builtins(information, args) == _TRUE)
 		return;
 
-	status = is_filee(cmd);
-	if (status == NON_PERMISSIONS)
+	pro = is_filee(cmd);
+	if (pro == NON_PERMISSIONS)
 	{
 		information->status_code = 126;
 		information->error_code = _CODE_EACCES;
@@ -29,7 +29,7 @@ void analyze(char **args, general_t *information, char *buffer)
 		return;
 	}
 
-	if (status == 1)
+	if (pro == 1)
 	{
 		execute(cmd, args, information, buffer);
 		return;
@@ -52,11 +52,10 @@ void analyze(char **args, general_t *information, char *buffer)
 }
 
 /**
- * exec_builtins - Check and execute the builtins
- * @info: Information about the shell
- * @arguments: Commands and arguments
- * Return: If the command passed is a builtins
- * return _TRUE if not return _FALSE
+ * exec_builtins - execute builtins
+ * @info: information
+ * @arguments: arguments
+ * Return: command passed
  */
 int exec_builtins(general_t *info, char **arguments)
 {
@@ -70,13 +69,10 @@ int exec_builtins(general_t *info, char **arguments)
 }
 
 /**
- * c_builtins - Check if the actual command is a builtin_t
- * or not
- *
- * @info: General information about the shell
- * @args: Arguments of the command
- * Return: If the command is an actual builtin, return _TRUE
- * if not _FALSE
+ * c_builtins - check builtin
+ * @info: information
+ * @args: Arguments
+ * Return: actual builtin
  */
 int c_builtins(general_t *info, char **args)
 {

@@ -5,26 +5,26 @@
  * my_strcmp - Compare two strings
  * @str1: String 1
  * @str2: String 2
- * Return: Integer
+ * Return: 0
  */
 int my_strcmp(char *str1, char *str2)
 {
-        int i;
+	int i;
 
-        for (i = 0; str1[i] != '\0'; i++)
-        {
-                if (str1[i] != str2[i])
-                        return (str1[i] - str2[i]);
-        }
+	for (i = 0; str1[i] != '\0'; i++)
+	{
+		if (str1[i] != str2[i])
+			return (str1[i] - str2[i]);
+	}
 
-        return (0);
+	return (0);
 }
 
 
 /**
  * my_strlen - Return the length of a strin
  * @message: String to calculate length
- * Return: Length of the string
+ * Return: string length
  */
 int my_strlen(char *message)
 {
@@ -38,10 +38,10 @@ int my_strlen(char *message)
 
 
 /**
- * my_strcpy - Copy a string to another
- * @destination: Destination copy
- * @source: Source for copy
- * Return: Return the value of dest
+ * my_strcpy - copy string to another string
+ * @destination: Destination
+ * @source: Source
+ * Return: value of dest
  */
 char *my_strcpy(char *destination, char *source)
 {
@@ -57,9 +57,9 @@ char *my_strcpy(char *destination, char *source)
 
 
 /**
- * my_strdup - Pointer to a newly allocated space in memory
- * @s: String to copy
- * Return: String copied
+ * my_strdup - Pointer
+ * @s: String
+ * Return: pointer
  */
 char *my_strdup(char *s)
 {
@@ -69,7 +69,7 @@ char *my_strdup(char *s)
 	if (s == NULL)
 		return (NULL);
 
-	size =my_strlen(s) + 1;
+	size = my_strlen(s) + 1;
 	dest = malloc(size * sizeof(char));
 	if (dest == NULL)
 		return (NULL);
@@ -81,21 +81,21 @@ char *my_strdup(char *s)
 
 /**
  * my_strcat - Concatenates two strings
- * @destination: String concatenate
- * @source: Source string
- * Return: A string concatenate
+ * @destination: string 1.
+ * @source: string 2.
+ * Return: pointer.
  */
 char *my_strcat(char *destination, char *source)
 {
-        int l_dest, i;
+	int l_dest, i;
 
-        l_dest = my_strlen(destination);
+	l_dest = my_strlen(destination);
 
-        for (i = 0; source[i] != '\0'; i++, l_dest++)
-                destination[l_dest] = source[i];
+	for (i = 0; source[i] != '\0'; i++, l_dest++)
+		destination[l_dest] = source[i];
 
-        destination[l_dest] = '\0';
+	destination[l_dest] = '\0';
 
-        return (destination);
+	return (destination);
 }
 

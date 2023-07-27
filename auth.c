@@ -2,20 +2,17 @@
 #include "shelll.h"
 
 /**
- * is_exec - Check if a filename have permissions
- * for run
- * @name: Filename to check
- *
- * Return: On success, PERMISSIONS
- * On error, NON_PERMISSIONS
+ * is_exec - checking file permissions.
+ * @name: file
+ * Return: On success, PERMISSIONS.
  */
 int is_exec(char *name)
 {
-	struct stat stats;
+	struct stat ben;
 
-	if (stat(name, &stats) == 0)
+	if (stat(name, &ben) == 0)
 	{
-		if (stats.st_mode & X_OK)
+		if (ben.st_mode & X_OK)
 			return (PERMISSIONS);
 		else
 			return (NON_PERMISSIONS);
@@ -25,9 +22,9 @@ int is_exec(char *name)
 }
 
 /**
- * is_filee - Check if is a file or binary
- * @f:File to check
- * Return: If is a file with the correct permissions, PERMISSIONS
+ * is_filee - evaluate file or binary
+ * @f:File to evaluate
+ * Return: permissions
  */
 int is_filee(char *f)
 {
@@ -42,10 +39,9 @@ int is_filee(char *f)
 }
 
 /**
- * _putchar - Print a character to STDOUT
- * @ch: Character to print
- * Return: On success 1
- * On error -1
+ * _putchar - character printer
+ * @ch: char
+ * Return: On success 1, otherwise -1
  */
 int _putchar(char ch)
 {
@@ -53,10 +49,9 @@ int _putchar(char ch)
 }
 
 /**
- * print - Print a message to STDOUT
- * @message: Message to print
- * Return: On success number of bytes printed
- * On errror -1, and set the error
+ * print - print a string
+ * @message: string
+ * Return: bytes printed
  */
 int print(char *message)
 {

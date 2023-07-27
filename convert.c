@@ -2,7 +2,7 @@
 #include "shelll.h"
 
 /**
- * digits - Cout the numbe of digits of a number
+ * digits - digits
  * @num: Number
  * Return: Digits
  */
@@ -17,8 +17,8 @@ int digits(int num)
 }
 
 /**
- * to_string - Conver @number to string
- * @num: Number to convert
+ * c_to_string - number to string
+ * @num: number
  * Return: Number as string
  */
 char *c_to_string(int num)
@@ -45,11 +45,9 @@ char *c_to_string(int num)
 
 
 /**
- * is_numerical - Check if is a digit
- *
- * @num: Number
- *
- * Return: If is a number, return 1 else return 0
+ * _numeral - digit checker
+ * @num: number to check
+ * Return: return 1 if it's a number, otherwise 0
  */
 int _numeral(unsigned int num)
 {
@@ -58,8 +56,8 @@ int _numeral(unsigned int num)
 
 /**
  * _atoi - Convert a string to a number
- * @str: String to convert
- * Return: Return the number
+ * @str: string passed
+ * Return: converted number
  */
 int _atoi(char *str)
 {
@@ -87,10 +85,9 @@ int _atoi(char *str)
 }
 
 /**
- * contains_letter - Search non-digits in a string
- * @str: String for search
- * Return: If a non-digits was found, return _TRUE
- * if not, return _FALSE
+ * _alpha - search for alphabets in a string
+ * @str: string
+ * Return: If a non-digits was found, return _TRUE otherwise _FALSE
  */
 int _alpha(char *str)
 {

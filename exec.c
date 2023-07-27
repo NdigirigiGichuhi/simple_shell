@@ -2,13 +2,13 @@
 #include "shelll.h"
 
 /**
- * execute - Execute a command in other process
- * @cmd: Command to execute
- * @args: Arguments of the @command
- * @info: General info about the shell
- * @buffer: Line readed
+ * execute - executes commands
+ * @command: command
+ * @args: Arguments
+ * @infomation: information
+ * @buffer: read bytes
  */
-void execute(char *command, char **args, general_t *info, char *buffer)
+void execute(char *command, char **args, general_t *infomation, char *buffer)
 {
 	int status;
 	pid_t pid;
@@ -21,13 +21,13 @@ void execute(char *command, char **args, general_t *info, char *buffer)
 
 		free_mm((void *) args);
 
-		if (info->value_path != NULL)
+		if (infomation->value_path != NULL)
 		{
-			free(info->value_path);
-			info->value_path = NULL;
+			free(infomation->value_path);
+			infomation->value_path = NULL;
 		}
 
-		free(info);
+		free(infomation);
 		free(buffer);
 		exit(1);
 	}
@@ -35,27 +35,28 @@ void execute(char *command, char **args, general_t *info, char *buffer)
 	{
 		waitpid(pid, &status, 0);
 		if (WIFEXITED(status))
-			info->status_code = WEXITSTATUS(status);
+			infomation->status_code = WEXITSTATUS(status);
 	}
 }
 
 
 /**
- * current_dirctory - Execute the command if the order require
- * @command: Command to execute
- * @args: Arguments of the @cmd
- * @buffer: Line readed
- * @info: General info about the shell
- * Return: Status of the operations
+ * current_dirctory - execute command
+ * @command: command
+ * @args: arguments
+ * @buffer: read bytes
+ * @infomation: information
+ * Return: status
  */
-int current_dirctory(char *command, char **args, char *buffer, general_t *info)
+int current_dirctory(char *command, char **args, char *buffer,
+		general_t *infomation)
 {
-	if (info->is_current_path == _FALSE)
+	if (infomation->is_current_path == _FALSE)
 		return (_FALSE);
 
 	if (is_exec(command) == PERMISSIONS)
 	{
-		execute(command, args, info, buffer);
+		execute(command, args, infomation, buffer);
 		return (_TRUE);
 	}
 
@@ -63,11 +64,11 @@ int current_dirctory(char *command, char **args, char *buffer, general_t *info)
 }
 
 /**
- * *my_realloc - Reallocates a memory block using malloc and free
- * @pointer: Pointer to the memory previously allocated
- * @old: Size, in bytes, of the allocated space for ptr
- * @new: New size, in bytes of the new memory block
- * Return: Memory reallocated
+ * *my_realloc - reallocates memory
+ * @pointer: pointer
+ * @old: old bytes
+ * @new: new bytes
+ * Return: memory pointer
  **/
 void *my_realloc(void *pointer, size_t old, size_t new)
 {

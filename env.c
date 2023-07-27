@@ -2,8 +2,8 @@
 #include "shelll.h"
 
 /**
- * get_env - gets environment variable
- * @n: variable to get
+ * get_env - checks environment variables
+ * @n: variable
  * Return: name
  */
 char *get_env(const char *n)
@@ -47,20 +47,18 @@ char *get_env(const char *n)
 }
 
 /**
- * which_directory - Find the directory needed
- *
- * @name: Command received
- * @info: General info about the shell
- *
- * Return: pointer string with found path or NULL in failure
+ * which_directory - locate directory
+ * @name: commands
+ * @infomation: information
+ * Return: pointer
  */
-char *which_directory(char *name, general_t *info)
+char *which_directory(char *name, general_t *infomation)
 {
 	char *path, *tmp, *tok;
 	char *s;
 	int size;
 
-	(void) info;
+	(void) infomation;
 
 	path = get_env("PATH");
 	if (path == NULL)
@@ -97,45 +95,44 @@ char *which_directory(char *name, general_t *info)
 }
 
 /**
- * is_curr_path -Check the order of the path
- * @p: PATH to check
- * @info: General infor about the shell
+ * is_curr_path - current path
+ * @p: path check
+ * @infomation: information
  */
-void is_curr_path(char *p, general_t *info)
+void is_curr_path(char *p, general_t *infomation)
 {
-	info->is_current_path = _FALSE;
+	infomation->is_current_path = _FALSE;
 
 	if (p == NULL)
 		return;
 
 	if (p[0] == ':')
-		info->is_current_path = _TRUE;
+		infomation->is_current_path = _TRUE;
 }
 
 /**
- * _get_env - Get all the environment
+ * _get_env - environment
  */
 void _get_env(void)
 {
-	char **tmp;
+	char **temp;
 	int i;
 
-	for (i = 0, tmp = environ; tmp[i] != NULL; i++)
+	for (i = 0, temp = environ; temp[i] != NULL; i++)
 	{
-		print(tmp[i]);
+		print(temp[i]);
 		_putchar('\n');
 	}
 }
 
 /**
- * bin_env - Implementation for the env builtin
- *
- * @info: General information about the shell
- * @args: Command
+ * bin_env -  env builtin
+ * @infomation: informatin
+ * @args: arguments
  */
-void bin_env(general_t *info, char **args)
+void bin_env(general_t *infomation, char **args)
 {
-	(void) info;
+	(void) infomation;
 	(void) args;
 
 	_get_env();

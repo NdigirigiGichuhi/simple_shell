@@ -25,7 +25,7 @@ void start(general_t *infomation)
 
 /**
  * read_line - Read lines in the prompt
- * Return: Buffer readed or NULL if EOF was found
+ * Return: read bytes
  */
 char *read_line()
 {
@@ -47,9 +47,9 @@ char *read_line()
 }
 
 /**
- * exec_prompt - Loop reading text
+ * exec_prompt - execute read prompt
  * @infomation: Struct of general informatio
- * Return: Buffer readed or NULL if EOF was found
+ * Return: read bytes
  */
 void exec_prompt(general_t *infomation)
 {
@@ -93,8 +93,9 @@ void exec_prompt(general_t *infomation)
 }
 
 /**
- * sigintHandler - Handler for SIGINT
- * @sig_n: Unused parameter
+ * sigintHandler - handler
+ * @sig_n: void
+ * Return: void.
  */
 void sigintHandler(int sig_n)
 {

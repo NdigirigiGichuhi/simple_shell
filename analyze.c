@@ -45,24 +45,24 @@ char *pat_han(general_t *infomation, char *str)
 char *rep_val(general_t *infomation, int *ind, char *str)
 {
 	int i, new, old;
-	char *value;
+	char *val;
 
 	i = *ind;
 	i++;
 
-	value = replace(infomation, ind, str + i);
-	if (value == NULL)
+	val = replace(infomation, ind, str + i);
+	if (val == NULL)
 	{
 		str = my_strcpy(str, "");
 		return (str);
 
 		old = my_strlen(str);
-		new = my_strlen(value) + 1;
+		new = my_strlen(val) + 1;
 
 		str = my_realloc(str, old, new);
-		str = my_strcpy(str, value);
+		str = my_strcpy(str, val);
 
-		free_mem(value);
+		free_mem(val);
 		*ind = i;
 	}
 	return (str);
@@ -77,7 +77,7 @@ char *rep_val(general_t *infomation, int *ind, char *str)
  */
 char *replace(general_t *infomation, int *i, char *str)
 {
-	char *tmp;
+	char *temp;
 	char symbol;
 
 	(void) i;
@@ -85,14 +85,14 @@ char *replace(general_t *infomation, int *i, char *str)
 
 	if (symbol != '?' && symbol != '$')
 	{
-		tmp = rep_env(infomation, str);
-		return (tmp);
+		temp = rep_env(infomation, str);
+		return (temp);
 	}
 
-	tmp = (symbol == '$') ? c_to_string(infomation->pid) :
+	temp = (symbol == '$') ? c_to_string(infomation->pid) :
 		c_to_string(infomation->status_code);
 
-	return (tmp);
+	return (temp);
 }
 
 /**
