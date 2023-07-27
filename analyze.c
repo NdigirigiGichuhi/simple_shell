@@ -8,7 +8,7 @@
  * Return: void.
  */
 
-void anal_p(general_t *infomation, char **args)
+void anal_p(command_t *infomation, char **args)
 {
 	int i;
 
@@ -22,7 +22,7 @@ void anal_p(general_t *infomation, char **args)
  * @str: arguments.
  * Return: pointer.
  */
-char *pat_han(general_t *infomation, char *str)
+char *pat_han(command_t *infomation, char *str)
 {
 	int i;
 
@@ -42,7 +42,7 @@ char *pat_han(general_t *infomation, char *str)
  * @str: string:
  * Return: pointer
  */
-char *rep_val(general_t *infomation, int *ind, char *str)
+char *rep_val(command_t *infomation, int *ind, char *str)
 {
 	int i, new, old;
 	char *val;
@@ -75,7 +75,7 @@ char *rep_val(general_t *infomation, int *ind, char *str)
  * @str: passed string.
  * Return: pointer.
  */
-char *replace(general_t *infomation, int *i, char *str)
+char *replace(command_t *infomation, int *i, char *str)
 {
 	char *temp;
 	char symbol;
@@ -101,7 +101,7 @@ char *replace(general_t *infomation, int *i, char *str)
  * @environ: environment.
  * Return: pointer.
  */
-char *rep_env(general_t *infomation, char *environ)
+char *rep_env(command_t *infomation, char *environ)
 {
 	char *env;
 

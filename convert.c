@@ -87,7 +87,7 @@ int _atoi(char *str)
 /**
  * _alpha - search for alphabets in a string
  * @str: string
- * Return: If a non-digits was found, return _TRUE otherwise _FALSE
+ * Return: If a non-digits was found, return 1 otherwise 0
  */
 int _alpha(char *str)
 {
@@ -95,9 +95,9 @@ int _alpha(char *str)
 
 	for (i = 0; str[i] != '\0'; i++)
 	{
-		if (_numeral(str[i]) == _FALSE)
-			return (_TRUE);
+		if (_numeral(str[i]) == 0)
+			return (1);
 	}
 
-	return (_FALSE);
+	return (0);
 }

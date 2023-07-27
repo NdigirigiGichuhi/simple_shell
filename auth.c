@@ -4,7 +4,7 @@
 /**
  * is_exec - checking file permissions.
  * @name: file
- * Return: On success, PERMISSIONS.
+ * Return: On success, 1, otherwise -1.
  */
 int is_exec(char *name)
 {
@@ -13,18 +13,18 @@ int is_exec(char *name)
 	if (stat(name, &ben) == 0)
 	{
 		if (ben.st_mode & X_OK)
-			return (PERMISSIONS);
+			return (1);
 		else
-			return (NON_PERMISSIONS);
+			return (-1);
 	}
 
-	return (NON_FILE);
+	return (-10);
 }
 
 /**
  * is_filee - evaluate file or binary
  * @f:File to evaluate
- * Return: permissions
+ * Return: 1
  */
 int is_filee(char *f)
 {
@@ -35,7 +35,7 @@ int is_filee(char *f)
 		if (f[i] == '/')
 			return (is_exec(f));
 
-	return (NON_FILE);
+	return (-10);
 }
 
 /**
@@ -45,7 +45,7 @@ int is_filee(char *f)
  */
 int _putchar(char ch)
 {
-	return (write(STDOUT, &ch, 1));
+	return (write(STDOUT_FILENO, &ch, 1));
 }
 
 /**
@@ -55,6 +55,6 @@ int _putchar(char ch)
  */
 int print(char *message)
 {
-	return (my_print(message, STDOUT));
+	return (my_print(message, STDOUT_FILENO));
 }
 

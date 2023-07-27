@@ -8,7 +8,7 @@
  * @infomation: information
  * @buffer: read bytes
  */
-void execute(char *command, char **args, general_t *infomation, char *buffer)
+void execute(char *command, char **args, command_t *infomation, char *buffer)
 {
 	int status;
 	pid_t pid;
@@ -49,18 +49,18 @@ void execute(char *command, char **args, general_t *infomation, char *buffer)
  * Return: status
  */
 int current_dirctory(char *command, char **args, char *buffer,
-		general_t *infomation)
+		command_t *infomation)
 {
-	if (infomation->is_current_path == _FALSE)
-		return (_FALSE);
+	if (infomation->curr_path == 0)
+		return (0);
 
-	if (is_exec(command) == PERMISSIONS)
+	if (is_exec(command) == 1)
 	{
 		execute(command, args, infomation, buffer);
-		return (_TRUE);
+		return (1);
 	}
 
-	return (_FALSE);
+	return (0);
 }
 
 /**

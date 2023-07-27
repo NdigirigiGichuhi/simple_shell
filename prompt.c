@@ -5,9 +5,9 @@
  * prompt - Print the prompt
  * @infomation: Struct of general information
  */
-void prompt(general_t *infomation)
+void prompt(command_t *infomation)
 {
-	if (infomation->mode == NON_INTERACTIVE)
+	if (infomation->mode == 0)
 		return;
 
 	print("Ben$ ");
@@ -17,7 +17,7 @@ void prompt(general_t *infomation)
  * start - Handle the mode
  * @infomation: Struct of information about the shell
  */
-void start(general_t *infomation)
+void start(command_t *infomation)
 {
 	exec_prompt(infomation);
 }
@@ -51,7 +51,7 @@ char *read_line()
  * @infomation: Struct of general informatio
  * Return: read bytes
  */
-void exec_prompt(general_t *infomation)
+void exec_prompt(command_t *infomation)
 {
 	char *buffer;
 	char **arguments;
@@ -65,11 +65,11 @@ void exec_prompt(general_t *infomation)
 		path = get_env("PATH");
 		is_curr_path(path, infomation);
 
-		infomation->environment = path;
+		infomation->enviro = path;
 		buffer = read_line();
 		if (buffer == NULL)
 		{
-			print(infomation->mode == INTERACTIVE ? "exit\n" : "");
+			print(infomation->mode == 1 ? "exit\n" : "");
 			free(path);
 			break;
 		}
@@ -79,8 +79,8 @@ void exec_prompt(general_t *infomation)
 		{
 			arguments = spt_wd(buffer, " \t\n");
 
-			infomation->arguments = arguments;
-			infomation->buffer = buffer;
+			infomation->args = arguments;
+			infomation->buff = buffer;
 			anal_p(infomation, arguments);
 			analyze(arguments, infomation, buffer);
 

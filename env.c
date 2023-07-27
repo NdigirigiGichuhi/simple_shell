@@ -52,7 +52,7 @@ char *get_env(const char *n)
  * @infomation: information
  * Return: pointer
  */
-char *which_directory(char *name, general_t *infomation)
+char *which_directory(char *name, command_t *infomation)
 {
 	char *path, *tmp, *tok;
 	char *s;
@@ -77,7 +77,7 @@ char *which_directory(char *name, general_t *infomation)
 		tmp = my_strcpy(tmp, tok);
 		tmp = my_strcat(tmp, s);
 
-		if (is_exec(tmp) == PERMISSIONS)
+		if (is_exec(tmp) == 1)
 		{
 			free(s);
 			free(path);
@@ -99,15 +99,15 @@ char *which_directory(char *name, general_t *infomation)
  * @p: path check
  * @infomation: information
  */
-void is_curr_path(char *p, general_t *infomation)
+void is_curr_path(char *p, command_t *infomation)
 {
-	infomation->is_current_path = _FALSE;
+	infomation->curr_path = 0;
 
 	if (p == NULL)
 		return;
 
 	if (p[0] == ':')
-		infomation->is_current_path = _TRUE;
+		infomation->curr_path = 1;
 }
 
 /**
@@ -130,7 +130,7 @@ void _get_env(void)
  * @infomation: informatin
  * @args: arguments
  */
-void bin_env(general_t *infomation, char **args)
+void bin_env(command_t *infomation, char **args)
 {
 	(void) infomation;
 	(void) args;

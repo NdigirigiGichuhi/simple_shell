@@ -35,7 +35,7 @@ int my_print(char *message, int file)
  */
 int print_error(char *message)
 {
-	return (my_print(message, STDERR));
+	return (my_print(message, STDERR_FILENO));
 }
 
 /**

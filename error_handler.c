@@ -6,19 +6,19 @@
  * @info: information
  * Return: error
  */
-char *message_selector(general_t info)
+char *message_selector(command_t info)
 {
 	int i, options;
 	error_t message[] = {
-		{_ENOENT, _CODE_ENOENT},
-		{_EACCES, _CODE_EACCES},
-		{_CMD_NOT_EXISTS, _CODE_CMD_NOT_EXISTS},
-		{_ILLEGAL_NUMBER, _CODE_ILLEGAL_NUMBER}
+		{"No such file or directory", CODE_3},
+		{"Permission denied", CODE_13},
+		{"not found", CODE_132},
+		{"Illegal number", CODE_133}
 	};
 
 	options = sizeof(message) / sizeof(message[0]);
 	for (i = 0; i < options; i++)
-		if (info.error_code == message[i].code)
+		if (info.err_code == message[i].code)
 			return (message[i].message);
 
 	return ("");
@@ -28,7 +28,7 @@ char *message_selector(general_t info)
  * error - prints error to standard output
  * @infomation: information
  */
-void error(general_t *infomation)
+void error(command_t *infomation)
 {
 	char *msg;
 	char *num;
@@ -40,11 +40,11 @@ void error(general_t *infomation)
 	num = c_to_string(infomation->n_commands);
 
 	size_number = my_strlen(num);
-	size_message = my_strlen(infomation->argv[0]);
+	size_message = my_strlen(infomation->av[0]);
 
 	aux = malloc(size_message + size_number + 3);
 
-	aux = my_strcpy(aux, infomation->argv[0]);
+	aux = my_strcpy(aux, infomation->av[0]);
 	aux = my_strcat(aux, ": ");
 	aux = my_strcat(aux, num);
 
@@ -61,7 +61,7 @@ void error(general_t *infomation)
  * @infomation: information
  * @extra: extra info
  */
-void error_extra(general_t *infomation, char *extra)
+void error_extra(command_t *infomation, char *extra)
 {
 	char *msg, *num, *ax, *ax2;
 	int size_num, size_msg, size_extra;
@@ -72,12 +72,12 @@ void error_extra(general_t *infomation, char *extra)
 	num = c_to_string(infomation->n_commands);
 
 	size_num = my_strlen(num);
-	size_msg = my_strlen(infomation->argv[0]);
+	size_msg = my_strlen(infomation->av[0]);
 	size_extra = my_strlen(extra);
 
 
 	ax = malloc(size_msg + size_num + 3);
-	ax = my_strcpy(ax, infomation->argv[0]);
+	ax = my_strcpy(ax, infomation->av[0]);
 	ax = my_strcat(ax, ": ");
 	ax = my_strcat(ax, num);
 

@@ -9,10 +9,10 @@
  */
 int main(int ac, char **av)
 {
-	general_t *infomation;
+	command_t *infomation;
 	int code;
 
-	infomation = malloc(sizeof(general_t));
+	infomation = malloc(sizeof(command_t));
 	if (infomation == NULL)
 	{
 		perror(av[0]);
@@ -22,9 +22,9 @@ int main(int ac, char **av)
 	infomation->pid = getpid();
 	infomation->status_code = 0;
 	infomation->n_commands = 0;
-	infomation->argc = ac;
-	infomation->argv = av;
-	infomation->mode = isatty(STDIN) == INTERACTIVE;
+	infomation->ac = ac;
+	infomation->av = av;
+	infomation->mode = isatty(STDIN_FILENO) == 1;
 	start(infomation);
 
 	code = infomation->status_code;

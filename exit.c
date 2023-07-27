@@ -6,22 +6,22 @@
  * @infomation: information
  * @arguments: Arguments received
  */
-void b_ex(general_t *infomation, char **arguments)
+void b_ex(command_t *infomation, char **arguments)
 {
 	int code, ch;
 
-	ch = _TRUE;
+	ch = 1;
 	if (arguments[1] != NULL)
 		ch = numroller(infomation, arguments[1]);
 
-	if (ch == _FALSE)
+	if (ch == 0)
 		return;
 
 	code = infomation->status_code;
 
 	free_mm((void **) arguments);
-	free_mem((void *) infomation->buffer);
-	free_mem((void *) infomation->environment);
+	free_mem((void *) infomation->buff);
+	free_mem((void *) infomation->enviro);
 	free_mem((void *) infomation);
 
 	exit(code);
@@ -31,9 +31,9 @@ void b_ex(general_t *infomation, char **arguments)
  * numroller - Control the arguments
  * @infomation: information
  * @num: builtin args
- * Return: If actual argument is valid, return _TRUE, otherwise _FALSE
+ * Return: If actual argument is valid, return 1, otherwise 0
  */
-int numroller(general_t *infomation, char *num)
+int numroller(command_t *infomation, char *num)
 {
 	int _num;
 
@@ -42,14 +42,14 @@ int numroller(general_t *infomation, char *num)
 	if (_num < 0 || _alpha(num))
 	{
 		infomation->status_code = 2;
-		infomation->error_code = _CODE_ILLEGAL_NUMBER;
+		infomation->err_code = CODE_133;
 		error_extra(infomation, num);
-		return (_FALSE);
+		return (0);
 	}
 
 	if (_num > 255)
 		infomation->status_code = _num % 256;
 	else
 		infomation->status_code = _num;
-	return (_TRUE);
+	return (1);
 }

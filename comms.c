@@ -7,7 +7,7 @@
  * @information: info
  * @buffer: read bytes.
  */
-void analyze(char **args, general_t *information, char *buffer)
+void analyze(char **args, command_t *information, char *buffer)
 {
 	char *cmd;
 	int pro;
@@ -17,14 +17,14 @@ void analyze(char **args, general_t *information, char *buffer)
 
 	cmd = args[0];
 	information->command = cmd;
-	if (c_builtins(information, args) == _TRUE)
+	if (c_builtins(information, args) == 1)
 		return;
 
 	pro = is_filee(cmd);
-	if (pro == NON_PERMISSIONS)
+	if (pro == -1)
 	{
 		information->status_code = 126;
-		information->error_code = _CODE_EACCES;
+		information->err_code = CODE_13;
 		error(information);
 		return;
 	}
@@ -35,7 +35,7 @@ void analyze(char **args, general_t *information, char *buffer)
 		return;
 	}
 
-	if (current_dirctory(cmd, args, buffer, information) == _TRUE)
+	if (current_dirctory(cmd, args, buffer, information) == 1)
 		return;
 
 	information->value_path = which_directory(cmd, information);
@@ -47,7 +47,7 @@ void analyze(char **args, general_t *information, char *buffer)
 	}
 
 	information->status_code = 127;
-	information->error_code = _CODE_CMD_NOT_EXISTS;
+	information->err_code = CODE_132;
 	error(information);
 }
 
@@ -57,15 +57,15 @@ void analyze(char **args, general_t *information, char *buffer)
  * @arguments: arguments
  * Return: command passed
  */
-int exec_builtins(general_t *info, char **arguments)
+int exec_builtins(command_t *info, char **arguments)
 {
 	int s;
 
 	s = c_builtins(info, arguments);
-	if (s == _FALSE)
-		return (_FALSE);
+	if (s == 0)
+		return (0);
 
-	return (_TRUE);
+	return (1);
 }
 
 /**
@@ -74,7 +74,7 @@ int exec_builtins(general_t *info, char **arguments)
  * @args: Arguments
  * Return: actual builtin
  */
-int c_builtins(general_t *info, char **args)
+int c_builtins(command_t *info, char **args)
 {
 	int i, size;
 	builtin_t builtins[] = {
@@ -88,10 +88,10 @@ int c_builtins(general_t *info, char **args)
 		if (my_strcmp(info->command, builtins[i].command) == 0)
 		{
 			builtins[i].func(info, args);
-			return (_TRUE);
+			return (1);
 		}
 	}
 
-	return (_FALSE);
+	return (0);
 }
 
