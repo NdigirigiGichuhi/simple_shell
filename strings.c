@@ -2,11 +2,31 @@
 #include "shelll.h"
 
 /**
- * _strlen - Return the length of a strin
+ * my_strcmp - Compare two strings
+ * @str1: String 1
+ * @str2: String 2
+ * Return: Integer
+ */
+int my_strcmp(char *str1, char *str2)
+{
+        int i;
+
+        for (i = 0; str1[i] != '\0'; i++)
+        {
+                if (str1[i] != str2[i])
+                        return (str1[i] - str2[i]);
+        }
+
+        return (0);
+}
+
+
+/**
+ * my_strlen - Return the length of a strin
  * @message: String to calculate length
  * Return: Length of the string
  */
-int _strlen(char *message)
+int my_strlen(char *message)
 {
 	int i;
 
@@ -16,33 +36,14 @@ int _strlen(char *message)
 	return (i);
 }
 
-/**
- * _strcat - Concatenates two strings
- * @destination: String concatenate
- * @source: Source string
- * Return: A string concatenate
- */
-char *_strcat(char *destination, char *source)
-{
-	int l_dest, i;
-
-	l_dest = _strlen(destination);
-
-	for (i = 0; source[i] != '\0'; i++, l_dest++)
-		destination[l_dest] = source[i];
-
-	destination[l_dest] = '\0';
-
-	return (destination);
-}
 
 /**
- * _strcpy - Copy a string to another
+ * my_strcpy - Copy a string to another
  * @destination: Destination copy
  * @source: Source for copy
  * Return: Return the value of dest
  */
-char *_strcpy(char *destination, char *source)
+char *my_strcpy(char *destination, char *source)
 {
 	int i;
 
@@ -56,11 +57,11 @@ char *_strcpy(char *destination, char *source)
 
 
 /**
- * _strdup - Pointer to a newly allocated space in memory
+ * my_strdup - Pointer to a newly allocated space in memory
  * @s: String to copy
  * Return: String copied
  */
-char *_strdup(char *s)
+char *my_strdup(char *s)
 {
 	int size, i;
 	char *dest;
@@ -68,32 +69,33 @@ char *_strdup(char *s)
 	if (s == NULL)
 		return (NULL);
 
-	size = _strlen(s) + 1;
+	size =my_strlen(s) + 1;
 	dest = malloc(size * sizeof(char));
 	if (dest == NULL)
 		return (NULL);
 
 	for (i = 0; i < size; i++)
 		*(dest + i) = *(s + i);
-
 	return (dest);
 }
 
 /**
- * _strcmp - Compare two strings
- * @str1: String 1
- * @str2: String 2
- * Return: Integer
+ * my_strcat - Concatenates two strings
+ * @destination: String concatenate
+ * @source: Source string
+ * Return: A string concatenate
  */
-int _strcmp(char *str1, char *str2)
+char *my_strcat(char *destination, char *source)
 {
-	int i;
+        int l_dest, i;
 
-	for (i = 0; str1[i] != '\0'; i++)
-	{
-		if (str1[i] != str2[i])
-			return (str1[i] - str2[i]);
-	}
+        l_dest = my_strlen(destination);
 
-	return (0);
+        for (i = 0; source[i] != '\0'; i++, l_dest++)
+                destination[l_dest] = source[i];
+
+        destination[l_dest] = '\0';
+
+        return (destination);
 }
+

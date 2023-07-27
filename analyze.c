@@ -50,17 +50,17 @@ char *rep_val(general_t *infomation, int *ind, char *str)
 	i = *ind;
 	i++;
 
-	value = replacement(infomation, ind, str + i);
+	value = replace(infomation, ind, str + i);
 	if (value == NULL)
 	{
-		str = _strcpy(str, "");
+		str = my_strcpy(str, "");
 		return (str);
 
-		old = _strlen(str);
-		new = _strlen(value) + 1;
+		old = my_strlen(str);
+		new = my_strlen(value) + 1;
 
-		str = _realloc(str, old, new);
-		str = _strcpy(str, value);
+		str = my_realloc(str, old, new);
+		str = my_strcpy(str, value);
 
 		free_mem(value);
 		*ind = i;
@@ -69,13 +69,13 @@ char *rep_val(general_t *infomation, int *ind, char *str)
 }
 
 /**
- * replacement - replace values.
+ * replace - replace values.
  * @infomation: information.
  * @i: index.
- * @str: string.
+ * @str: passed string.
  * Return: pointer.
  */
-char *replacement(general_t *infomation, int *i, char *str)
+char *replace(general_t *infomation, int *i, char *str)
 {
 	char *tmp;
 	char symbol;
@@ -85,23 +85,23 @@ char *replacement(general_t *infomation, int *i, char *str)
 
 	if (symbol != '?' && symbol != '$')
 	{
-		tmp = replace_env(infomation, str);
+		tmp = rep_env(infomation, str);
 		return (tmp);
 	}
 
-	tmp = (symbol == '$') ? to_string(infomation->pid) :
-		to_string(infomation->status_code);
+	tmp = (symbol == '$') ? c_to_string(infomation->pid) :
+		c_to_string(infomation->status_code);
 
 	return (tmp);
 }
 
 /**
- * replace_env - replaces environment.
+ * rep_env - replaces environment.
  * @infomation: information.
  * @environ: environment.
  * Return: pointer.
  */
-char *replace_env(general_t *infomation, char *environ)
+char *rep_env(general_t *infomation, char *environ)
 {
 	char *env;
 

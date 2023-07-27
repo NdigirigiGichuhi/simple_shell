@@ -33,7 +33,7 @@ int is_filee(char *f)
 {
 	int i, s;
 
-	s = _strlen(f);
+	s = my_strlen(f);
 	for (i = 0; i < s; i++)
 		if (f[i] == '/')
 			return (is_exec(f));
@@ -60,6 +60,6 @@ int _putchar(char ch)
  */
 int print(char *message)
 {
-	return (print_to_fd(message, STDOUT));
+	return (my_print(message, STDOUT));
 }
 

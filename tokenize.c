@@ -23,7 +23,7 @@ char **spt_wd(char *command, const char *sep)
 		{
 			if (token[0] == '#')
 				break;
-			tmp = _realloc(wd, old, (new + 1) * sizeof(char *));
+			tmp = my_realloc(wd, old, (new + 1) * sizeof(char *));
 			old = (new + 1) * sizeof(char *);
 			if (tmp == NULL)
 				break;
@@ -31,7 +31,7 @@ char **spt_wd(char *command, const char *sep)
 			wd = tmp;
 			++new;
 
-			wd[new - 2] = malloc(_strlen(token) + 1);
+			wd[new - 2] = malloc(my_strlen(token) + 1);
 			if (wd == NULL)
 			{
 				free(tmp);
@@ -39,7 +39,7 @@ char **spt_wd(char *command, const char *sep)
 			}
 
 			if (wd[new - 2] != NULL)
-				_strcpy(wd[new - 2], token);
+				my_strcpy(wd[new - 2], token);
 
 			token = strtok(NULL, sep);
 
@@ -70,22 +70,22 @@ char *j_wd(char *w1, char *w2, char *w3,  const char *sep)
 	size_str1 = size_str2 = size_sep = 0;
 
 	if (w1 != NULL)
-		size_str1 = _strlen(w1);
+		size_str1 = my_strlen(w1);
 	else
 		w1 = "";
 
 	if (w2 != NULL)
-		size_str2 = _strlen(w2);
+		size_str2 = my_strlen(w2);
 	else
 		w2 = "";
 
 	if (w3 != NULL)
-		size_str3 = _strlen(w3);
+		size_str3 = my_strlen(w3);
 	else
 		w3 = "";
 
 	if (sep != NULL)
-		size_sep = _strlen((char *) sep);
+		size_sep = my_strlen((char *) sep);
 	else
 		sep = "";
 
@@ -93,12 +93,12 @@ char *j_wd(char *w1, char *w2, char *w3,  const char *sep)
 	if (aux == NULL)
 		return (NULL);
 
-	aux = _strcpy(aux, w1);
-	aux = _strcat(aux, (char *) sep);
-	aux = _strcat(aux, w2);
-	aux = _strcat(aux, (char *) sep);
-	aux = _strcat(aux, w3);
-	aux = _strcat(aux, "\n");
+	aux = my_strcpy(aux, w1);
+	aux = my_strcat(aux, (char *) sep);
+	aux = my_strcat(aux, w2);
+	aux = my_strcat(aux, (char *) sep);
+	aux = my_strcat(aux, w3);
+	aux = my_strcat(aux, "\n");
 
 	return (aux);
 }

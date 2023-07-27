@@ -2,14 +2,14 @@
 #include "shelll.h"
 
 /**
- * _putchar_to_fd - Print a character to a specific file
+ * my_putchar - Print a character to a specific file
  * descriptor
  * @ch: Character to print
  * @file: Place to print the character
  * Return: On success 1.
  * On error, -1 is returned, and errno is set appropriately.
  */
-int _putchar_to_fd(char ch, int file)
+int my_putchar(char ch, int file)
 {
 	return (write(file, &ch, 1));
 }
@@ -22,11 +22,11 @@ int _putchar_to_fd(char ch, int file)
  * Return: On success numbers of bytes printed.
  * On error, -1 is returned, and errno is set appropriately.
  */
-int print_to_fd(char *message, int file)
+int my_print(char *message, int file)
 {
 	int s;
 
-	s = _strlen(message);
+	s = my_strlen(message);
 
 	return (write(file, message, s));
 }
@@ -38,7 +38,7 @@ int print_to_fd(char *message, int file)
  */
 int print_error(char *message)
 {
-	return (print_to_fd(message, STDERR));
+	return (my_print(message, STDERR));
 }
 
 /**

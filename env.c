@@ -12,11 +12,11 @@ char *get_env(const char *n)
 	char *a, *tok, *v;
 	int size;
 
-	size = _strlen((char *) n);
+	size = my_strlen((char *) n);
 
 	for (environment = environ; *environment; ++environment)
 	{
-		a = _strdup(*environment);
+		a = my_strdup(*environment);
 
 		tok = strtok(a, "=");
 		if (tok == NULL)
@@ -25,16 +25,16 @@ char *get_env(const char *n)
 			return (NULL);
 		}
 
-		if (_strlen(tok) != size)
+		if (my_strlen(tok) != size)
 		{
 			free(a);
 			continue;
 		}
 
-		if (_strcmp((char *) n, a) == 0)
+		if (my_strcmp((char *) n, a) == 0)
 		{
 			tok = strtok(NULL, "=");
-			v = _strdup(tok);
+			v = my_strdup(tok);
 
 			free(a);
 			return (v);
@@ -68,16 +68,16 @@ char *which_directory(char *name, general_t *info)
 
 	tok = strtok(path, ":");
 
-	size = _strlen(name) + 2;
+	size = my_strlen(name) + 2;
 	s = malloc(size * sizeof(char));
-	s = _strcpy(s, "/");
-	s = _strcat(s, name);
+	s = my_strcpy(s, "/");
+	s = my_strcat(s, name);
 
 	while (tok != NULL)
 	{
-		tmp = malloc(_strlen(tok) + size);
-		tmp = _strcpy(tmp, tok);
-		tmp = _strcat(tmp, s);
+		tmp = malloc(my_strlen(tok) + size);
+		tmp = my_strcpy(tmp, tok);
+		tmp = my_strcat(tmp, s);
 
 		if (is_exec(tmp) == PERMISSIONS)
 		{

@@ -1,6 +1,5 @@
 #ifndef SHELL_H
 #define SHELL_H
-
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
@@ -9,6 +8,11 @@
 #include <errno.h>
 #include <stdio.h>
 #include "shelll.h"
+
+#define _CODE_ENOENT           3
+#define _CODE_EACCES           13
+#define _CODE_CMD_NOT_EXISTS   132
+#define _CODE_ILLEGAL_NUMBER   133
 
 extern char **environ;
 
@@ -21,7 +25,7 @@ int is_filee(char *command);
 
 
 /* memory.c */
-void *_realloc(void *ptr, size_t old_size, size_t new_size);
+void *my_realloc(void *ptr, size_t old_size, size_t new_size);
 
 /* free.c */
 void free_mem(void *ptr);
@@ -45,12 +49,12 @@ int current_dirctory(char *cmd, char **arguments, char *buff,
 				general_t *info);
 
 /* builtins.c */
-int builtins(general_t *info, char **arguments);
-int check_builtin(general_t *info, char **arguments);
+int exec_builtins(general_t *info, char **arguments);
+int c_builtins(general_t *info, char **arguments);
 
 /* exit.c */
-void bin_exit(general_t *info, char **arguments);
-int number_controller(general_t *info, char *number);
+void b_ex(general_t *info, char **arguments);
+int numroller(general_t *info, char *number);
 
 /* env.c */
 void bin_env(general_t *info, char **arguments);

@@ -17,7 +17,7 @@ void analyze(char **args, general_t *information, char *buffer)
 
 	cmd = args[0];
 	information->command = cmd;
-	if (check_builtin(information, args) == _TRUE)
+	if (c_builtins(information, args) == _TRUE)
 		return;
 
 	status = is_filee(cmd);
@@ -52,17 +52,17 @@ void analyze(char **args, general_t *information, char *buffer)
 }
 
 /**
- * builtins - Check and execute the builtins
+ * exec_builtins - Check and execute the builtins
  * @info: Information about the shell
  * @arguments: Commands and arguments
  * Return: If the command passed is a builtins
  * return _TRUE if not return _FALSE
  */
-int builtins(general_t *info, char **arguments)
+int exec_builtins(general_t *info, char **arguments)
 {
 	int s;
 
-	s = check_builtin(info, arguments);
+	s = c_builtins(info, arguments);
 	if (s == _FALSE)
 		return (_FALSE);
 
@@ -70,7 +70,7 @@ int builtins(general_t *info, char **arguments)
 }
 
 /**
- * check_builtin - Check if the actual command is a builtin_t
+ * c_builtins - Check if the actual command is a builtin_t
  * or not
  *
  * @info: General information about the shell
@@ -78,18 +78,18 @@ int builtins(general_t *info, char **arguments)
  * Return: If the command is an actual builtin, return _TRUE
  * if not _FALSE
  */
-int check_builtin(general_t *info, char **args)
+int c_builtins(general_t *info, char **args)
 {
 	int i, size;
 	builtin_t builtins[] = {
-		{"exit", bin_exit},
+		{"exit", b_ex},
 		{"env", bin_env}
 	};
 
 	size = sizeof(builtins) / sizeof(builtins[0]);
 	for (i = 0; i < size; i++)
 	{
-		if (_strcmp(info->command, builtins[i].command) == 0)
+		if (my_strcmp(info->command, builtins[i].command) == 0)
 		{
 			builtins[i].func(info, args);
 			return (_TRUE);

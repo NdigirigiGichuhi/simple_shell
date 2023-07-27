@@ -22,10 +22,6 @@
 #define _CMD_NOT_EXISTS  "not found"
 #define _ILLEGAL_NUMBER  "Illegal number"
 
-#define _CODE_ENOENT           3
-#define _CODE_EACCES           13
-#define _CODE_CMD_NOT_EXISTS   132
-#define _CODE_ILLEGAL_NUMBER   133
 typedef struct __attribute__((__packed__))
 {
 	int argc;
@@ -57,27 +53,27 @@ typedef struct __attribute__((__packed__))
 
 
 /* text.c */
-void start_prompt(general_t *info);
+void exec_prompt(general_t *info);
 void prompt(general_t *info);
-char *read_prompt();
+char *read_line();
 void sigintHandler(int sig_num);
 
 /* utils_text.c */
-int _strlen(char *msg);
-char *_strcat(char *dest, char *src);
-char *_strcpy(char *dest, char *src);
-char *_strdup(char *str);
-int _strcmp(char *str1, char *str2);
+int my_strlen(char *msg);
+char *my_strcat(char *dest, char *src);
+char *my_strcpy(char *dest, char *src);
+char *my_strdup(char *str);
+int my_strcmp(char *str1, char *str2);
 
 /* utils_text2.c */
-char *to_string(int number);
-int is_numerical(unsigned int n);
+char *c_to_string(int number);
+int _numeral(unsigned int n);
 int _atoi(char *s);
-int contains_letter(char *s);
+int _alpha(char *s);
 
 /* printers.c */
-int _putchar_to_fd(char l, int fd);
-int print_to_fd(char *msg, int fd);
+int my_putchar(char l, int fd);
+int my_print(char *msg, int fd);
 
 /* printers_out.c */
 int _putchar(char c);
@@ -96,7 +92,7 @@ char *pat_han(general_t *info, char *string);
 char *rep_val(general_t *info, int *index, char *string);
 
 /* patterns_replacer.c */
-char *replacement(general_t *info, int *index, char *string);
-char *replace_env(general_t *info, char *environment);
+char *replace(general_t *info, int *i, char *string);
+char *rep_env(general_t *info, char *environment);
 
 #endif /* GENERAL_H */

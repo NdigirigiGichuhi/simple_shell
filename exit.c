@@ -2,27 +2,27 @@
 #include "shelll.h"
 
 /**
- * bin_exit - Implementation of the exit builtin
- * @info: Information about the shell
- * @args: Arguments received
+ * b_ex - Implementation of the exit builtin
+ * @infomation: Information about the shell
+ * @arguments: Arguments received
  */
-void bin_exit(general_t *info, char **args)
+void b_ex(general_t *infomation, char **arguments)
 {
-	int code, status;
+	int code, ch;
 
-	status = _TRUE;
-	if (args[1] != NULL)
-		status = number_controller(info, args[1]);
+	ch = _TRUE;
+	if (arguments[1] != NULL)
+		ch = numroller(infomation, arguments[1]);
 
-	if (status == _FALSE)
+	if (ch == _FALSE)
 		return;
 
-	code = info->status_code;
+	code = infomation->status_code;
 
-	free_mm((void **) args);
-	free_mem((void *) info->buffer);
-	free_mem((void *) info->environment);
-	free_mem((void *) info);
+	free_mm((void **) arguments);
+	free_mem((void *) infomation->buffer);
+	free_mem((void *) infomation->environment);
+	free_mem((void *) infomation);
 
 	exit(code);
 }
@@ -34,13 +34,13 @@ void bin_exit(general_t *info, char **args)
  * Return: If the actual argument is valid, return _TRUE
  * if not, return _FALSE
  */
-int number_controller(general_t *info, char *num)
+int numroller(general_t *info, char *num)
 {
 	int _num;
 
 	_num = _atoi(num);
 
-	if (_num < 0 || contains_letter(num))
+	if (_num < 0 || _alpha(num))
 	{
 		info->status_code = 2;
 		info->error_code = _CODE_ILLEGAL_NUMBER;

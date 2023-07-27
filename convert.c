@@ -21,7 +21,7 @@ int digits(int num)
  * @num: Number to convert
  * Return: Number as string
  */
-char *to_string(int num)
+char *c_to_string(int num)
 {
 	int n_digits, i;
 	char *_num;
@@ -51,7 +51,7 @@ char *to_string(int num)
  *
  * Return: If is a number, return 1 else return 0
  */
-int is_numerical(unsigned int num)
+int _numeral(unsigned int num)
 {
 	return (num >= '0' && num <= '9');
 }
@@ -70,7 +70,7 @@ int _atoi(char *str)
 	number = 0;
 	for (i = 0; str[i] != '\0'; i++)
 	{
-		if (is_numerical(str[i]))
+		if (_numeral(str[i]))
 		{
 			number = (str[i] - 48)	+ number * 10;
 
@@ -92,13 +92,13 @@ int _atoi(char *str)
  * Return: If a non-digits was found, return _TRUE
  * if not, return _FALSE
  */
-int contains_letter(char *str)
+int _alpha(char *str)
 {
 	int i;
 
 	for (i = 0; str[i] != '\0'; i++)
 	{
-		if (is_numerical(str[i]) == _FALSE)
+		if (_numeral(str[i]) == _FALSE)
 			return (_TRUE);
 	}
 

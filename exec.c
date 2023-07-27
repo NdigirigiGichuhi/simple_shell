@@ -8,7 +8,7 @@
  * @info: General info about the shell
  * @buffer: Line readed
  */
-void execute(char *cmd, char **args, general_t *info, char *buffer)
+void execute(char *command, char **args, general_t *info, char *buffer)
 {
 	int status;
 	pid_t pid;
@@ -16,7 +16,7 @@ void execute(char *cmd, char **args, general_t *info, char *buffer)
 	pid = fork();
 	if (pid == 0)
 	{
-		execve(cmd, args, environ);
+		execve(command, args, environ);
 		perror("./sh");
 
 		free_mm((void *) args);
@@ -63,13 +63,13 @@ int current_dirctory(char *command, char **args, char *buffer, general_t *info)
 }
 
 /**
- *  * _realloc - Reallocates a memory block using malloc and free
+ * *my_realloc - Reallocates a memory block using malloc and free
  * @pointer: Pointer to the memory previously allocated
  * @old: Size, in bytes, of the allocated space for ptr
  * @new: New size, in bytes of the new memory block
  * Return: Memory reallocated
  **/
-void *_realloc(void *pointer, size_t old, size_t new)
+void *my_realloc(void *pointer, size_t old, size_t new)
 {
 	char *s, *au;
 	unsigned int a;

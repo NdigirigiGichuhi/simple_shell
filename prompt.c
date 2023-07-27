@@ -10,24 +10,24 @@ void prompt(general_t *infomation)
 	if (infomation->mode == NON_INTERACTIVE)
 		return;
 
-	print("Ben_Cliff$ ");
+	print("Ben$ ");
 }
 
 /**
  * start - Handle the mode
- * @info: Struct of information about the shell
+ * @infomation: Struct of information about the shell
  */
-void start(general_t *info)
+void start(general_t *infomation)
 {
-	start_prompt(info);
+	exec_prompt(infomation);
 }
 
 
 /**
- * read_prompt - Read lines in the prompt
+ * read_line - Read lines in the prompt
  * Return: Buffer readed or NULL if EOF was found
  */
-char *read_prompt()
+char *read_line()
 {
 	char *buffer;
 	int r;
@@ -47,11 +47,11 @@ char *read_prompt()
 }
 
 /**
- * start_prompt - Loop reading text
+ * exec_prompt - Loop reading text
  * @infomation: Struct of general informatio
  * Return: Buffer readed or NULL if EOF was found
  */
-void start_prompt(general_t *infomation)
+void exec_prompt(general_t *infomation)
 {
 	char *buffer;
 	char **arguments;
@@ -66,7 +66,7 @@ void start_prompt(general_t *infomation)
 		is_curr_path(path, infomation);
 
 		infomation->environment = path;
-		buffer = read_prompt();
+		buffer = read_line();
 		if (buffer == NULL)
 		{
 			print(infomation->mode == INTERACTIVE ? "exit\n" : "");

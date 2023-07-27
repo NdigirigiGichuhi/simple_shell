@@ -3,9 +3,7 @@
 
 /**
  * message_selector - Select the message that match with the error_code
- *
  * @info: General information about the shell
- *
  * Return: Error message
  */
 char *message_selector(general_t info)
@@ -28,10 +26,9 @@ char *message_selector(general_t info)
 
 /**
  * error - Print the error
- *
  * @info: General information about the shell
  */
-void error(general_t *info)
+void error(general_t *infomation)
 {
 	char *msg;
 	char *num;
@@ -39,19 +36,19 @@ void error(general_t *info)
 	int size_number, size_message;
 
 	num = NULL;
-	msg = message_selector(*info);
-	num = to_string(info->n_commands);
+	msg = message_selector(*infomation);
+	num = c_to_string(infomation->n_commands);
 
-	size_number = _strlen(num);
-	size_message = _strlen(info->argv[0]);
+	size_number = my_strlen(num);
+	size_message = my_strlen(infomation->argv[0]);
 
 	aux = malloc(size_message + size_number + 3);
 
-	aux = _strcpy(aux, info->argv[0]);
-	aux = _strcat(aux, ": ");
-	aux = _strcat(aux, num);
+	aux = my_strcpy(aux, infomation->argv[0]);
+	aux = my_strcat(aux, ": ");
+	aux = my_strcat(aux, num);
 
-	msg = j_wd(aux, info->command, msg, ": ");
+	msg = j_wd(aux, infomation->command, msg, ": ");
 	print_error(msg);
 
 	free(msg);
@@ -65,36 +62,36 @@ void error(general_t *info)
  * @info: General information about the shell
  * @extra: Extra information
  */
-void error_extra(general_t *info, char *extra)
+void error_extra(general_t *infomation, char *extra)
 {
-	char *message, *number, *aux, *aux2;
-	int size_number, size_message, size_extra;
+	char *msg, *num, *ax, *ax2;
+	int size_num, size_msg, size_extra;
 
 
-	number = NULL;
-	message = message_selector(*info);
-	number = to_string(info->n_commands);
+	num = NULL;
+	msg = message_selector(*infomation);
+	num = c_to_string(infomation->n_commands);
 
-	size_number = _strlen(number);
-	size_message = _strlen(info->argv[0]);
-	size_extra = _strlen(extra);
+	size_num = my_strlen(num);
+	size_msg = my_strlen(infomation->argv[0]);
+	size_extra = my_strlen(extra);
 
 
-	aux = malloc(size_message + size_number + 3);
-	aux = _strcpy(aux, info->argv[0]);
-	aux = _strcat(aux, ": ");
-	aux = _strcat(aux, number);
+	ax = malloc(size_msg + size_num + 3);
+	ax = my_strcpy(ax, infomation->argv[0]);
+	ax = my_strcat(ax, ": ");
+	ax = my_strcat(ax, num);
 
-	aux2 = malloc(_strlen(message) + size_extra + 3);
-	aux2 = _strcpy(aux2, message);
-	aux2 = _strcat(aux2, ": ");
-	aux2 = _strcat(aux2, extra);
+	ax2 = malloc(my_strlen(msg) + size_extra + 3);
+	ax2 = my_strcpy(ax2, msg);
+	ax2 = my_strcat(ax2, ": ");
+	ax2 = my_strcat(ax2, extra);
 
-	message = j_wd(aux, info->command, aux2, ": ");
-	print_error(message);
+	msg = j_wd(ax, infomation->command, ax2, ": ");
+	print_error(msg);
 
-	free(message);
-	free(number);
-	free(aux);
-	free(aux2);
+	free(msg);
+	free(num);
+	free(ax);
+	free(ax2);
 }
